@@ -1,6 +1,7 @@
-import { useState } from 'react';
 import { Card, CardDescription, CardHeader, CardTitle } from "./ui/card";
 import { MagnifierIcon, WalletIcon, ChartIcon } from "./Icons";
+// import cubeLeg from "../assets/cube-leg.png";
+// import Nairobi from "../assets/Nairobi.jpg";
 import Nairobi from "../assets/nrb_sky.png";
 
 interface ServiceProps {
@@ -31,12 +32,6 @@ const serviceList: ServiceProps[] = [
 ];
 
 export const Services = () => {
-  const [selectedService, setSelectedService] = useState<string | null>(null);
-
-  const handleCardClick = (title: string) => {
-    setSelectedService(selectedService === title ? null : title);
-  };
-
   return (
     <section className="container py-24 sm:py-32">
       <div className="grid lg:grid-cols-[1fr,1fr] gap-8 place-items-center">
@@ -57,34 +52,19 @@ export const Services = () => {
 
           <div className="flex flex-col gap-8">
             {serviceList.map(({ icon, title, description }: ServiceProps) => (
-              <div key={title}>
-                <Card onClick={() => handleCardClick(title)} className="cursor-pointer">
-                  <CardHeader className="space-y-1 flex md:flex-row justify-start items-start gap-4">
-                    <div className="mt-1 bg-primary/20 p-1 rounded-2xl">
-                      {icon}
-                    </div>
-                    <div>
-                      <CardTitle>{title}</CardTitle>
-                      <CardDescription className="text-md mt-2">
-                        {description}
-                      </CardDescription>
-                    </div>
-                  </CardHeader>
-                </Card>
-                {selectedService === title && (
-                  <form className="mt-4 p-4 border rounded-lg">
-                    <div className="mb-4">
-                      <label className="block text-sm font-medium text-gray-700">Name</label>
-                      <input type="text" className="mt-1 block w-full border-gray-300 rounded-md shadow-sm" />
-                    </div>
-                    <div className="mb-4">
-                      <label className="block text-sm font-medium text-gray-700">Email</label>
-                      <input type="email" className="mt-1 block w-full border-gray-300 rounded-md shadow-sm" />
-                    </div>
-                    <button type="submit" className="px-4 py-2 bg-primary text-white rounded-md">Submit</button>
-                  </form>
-                )}
-              </div>
+              <Card key={title}>
+                <CardHeader className="space-y-1 flex md:flex-row justify-start items-start gap-4">
+                  <div className="mt-1 bg-primary/20 p-1 rounded-2xl">
+                    {icon}
+                  </div>
+                  <div>
+                    <CardTitle>{title}</CardTitle>
+                    <CardDescription className="text-md mt-2">
+                      {description}
+                    </CardDescription>
+                  </div>
+                </CardHeader>
+              </Card>
             ))}
           </div>
         </div>
