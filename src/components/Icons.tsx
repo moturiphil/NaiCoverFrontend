@@ -586,6 +586,81 @@ export const ChartIcon = () => {
   );
 };
 
+export const MotorCarIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 128 128"
+      className="w-12 fill-primary"
+    >
+      <title>Motor Car Icon</title>
+      <g>
+        <path
+          d="M20,80h88a8,8,0,0,1,8,8v24a8,8,0,0,1-8,8H20a8,8,0,0,1-8-8V88A8,8,0,0,1,20,80Z"
+          className="cls-1"
+        />
+        <circle cx="32" cy="108" r="8" className="cls-1" />
+        <circle cx="96" cy="108" r="8" className="cls-1" />
+        <path
+          d="M40,64c0,8,48,8,48,0s-48-8-48,0Z"
+          className="cls-1"
+        />
+      </g>
+    </svg>
+  );
+};
+
+
+export const MotorcycleIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 128 128"
+      className="w-12 fill-primary"
+    >
+      <title>Motorcycle Icon</title>
+      <g>
+        <circle cx="32" cy="108" r="8" className="cls-1" />
+        <circle cx="96" cy="108" r="8" className="cls-1" />
+        <path
+          d="M25,84s3-5,7-5h15l6,8h8l5-8h15c4,0,7,5,7,5s-2,5-7,5H56l-5,6-7-6H32c-5,0-7-5-7-5Z"
+          className="cls-1"
+        />
+      </g>
+    </svg>
+  );
+};
+export const PersonalAccidentIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 128 128"
+      className="w-12 fill-primary"
+    >
+      <title>Personal Accident Icon</title>
+      <g>
+        <path
+          d="M44,48a12,12,0,1,1,12,12A12,12,0,0,1,44,48Z"
+          className="cls-1"
+        />
+        <path
+          d="M50,88s-2-8-6-8-6,8-6,8V120a6,6,0,0,0,6,6h12a6,6,0,0,0,6-6V88Z"
+          className="cls-1"
+        />
+        <path
+          d="M75,70a10,10,0,1,1,10,10A10,10,0,0,1,75,70Z"
+          className="cls-1"
+        />
+        <path
+          d="M73,84v16h-12V84h-16v-12h16V56h12v16h16v12Z"
+          className="cls-1"
+        />
+      </g>
+    </svg>
+  );
+};
+
+
 export const MagnifierIcon = () => {
   return (
     <svg

@@ -12,7 +12,8 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 
-import { GitHubLogoIcon } from "@radix-ui/react-icons";
+// import { GitHubLogoIcon } from "@radix-ui/react-icons";
+// import { Person } from "@radix-ui/react-icons";
 import { buttonVariants } from "./ui/button";
 import { Menu } from "lucide-react";
 import { ModeToggle } from "./mode-toggle";
@@ -25,16 +26,16 @@ interface RouteProps {
 
 const routeList: RouteProps[] = [
   {
-    href: "#features",
-    label: "Features",
+    href: "#home",
+    label: "Home",
   },
   {
-    href: "#testimonials",
-    label: "Testimonials",
+    href: "#faq",
+    label: "FAQ",
   },
   {
-    href: "#pricing",
-    label: "Pricing",
+    href: "#contact",
+    label: "Contact Us",
   },
   {
     href: "#faq",
@@ -55,7 +56,7 @@ export const Navbar = () => {
               className="ml-2 font-bold text-xl flex"
             >
               <LogoIcon />
-              ShadcnUI/React
+              InsureMore
             </a>
           </NavigationMenuItem>
 
@@ -102,8 +103,8 @@ export const Navbar = () => {
                       variant: "secondary",
                     })}`}
                   >
-                    <GitHubLogoIcon className="mr-2 w-5 h-5" />
-                    Github
+                    {/* <GitHubLogoIcon className="mr-2 w-5 h-5" /> */}
+                    My Policies
                   </a>
                 </nav>
               </SheetContent>
@@ -133,8 +134,8 @@ export const Navbar = () => {
               target="_blank"
               className={`border ${buttonVariants({ variant: "secondary" })}`}
             >
-              <GitHubLogoIcon className="mr-2 w-5 h-5" />
-              Github
+              {/* <GitHubLogoIcon className="mr-2 w-5 h-5" /> */}
+              My Policies
             </a>
 
             <ModeToggle />
