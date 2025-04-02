@@ -16,17 +16,12 @@ export const About = () => {
             <div className="pb-6">
               <h2 className="text-3xl md:text-4xl font-bold">
                 <span className="bg-gradient-to-b from-primary/60 to-primary text-transparent bg-clip-text">
-                  Your Insurance, Simplified.{" "}
+                  Insurance Made for You—Simple, Fast & Reliable.{" "}
                 </span>
               </h2>
               <p className="text-xl text-muted-foreground mt-4">
-                Finding the right insurance doesn’t have to be complicated. With
-                [App Name], we bring together the best insurance options to help
-                you make informed decisions with ease. Whether you’re looking
-                for car, home, life, or health insurance, we provide a simple,
-                quick, and transparent way to compare and choose plans that fit
-                your needs and budget. Our platform does all the hard work, so
-                you can focus on what really matters—your peace of mind.
+                Get covered in minutes. Claims paid in hours. No jargon, just
+                protection that works.
               </p>
               <br />
               <br />

@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
+// import { useState } from "react";
 // import InsuranceFormNavbar from "../../components/InsuranceFormNavbar";
 import { Start } from "../../components/MotorCarInsurance/Start";
-import { CarDetails } from "../../components/MotorCarInsurance/CarDetails";
-import { Footer } from "../../components/Footer";
-import ProgressBar from "@/components/PrograssBar";
+// import { CarDetails } from "../../components/MotorCarInsurance/CarDetails";
+// import { Footer } from "../../components/Footer";
+// import ProgressBar from "@/components/PrograssBar";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -13,64 +14,64 @@ import {
 import { buttonVariants } from "@/components/ui/button";
 import { LogoIcon } from "@/components/Icons";
 
-const questions = [
-  {
-    question: "Vehicle Use?",
-    options: ["Private", "Commercial", "PSV"],
-  },
-  {
-    question: "Type of insurance interested in?",
-    options: ["Comprehensive", "Third Party only"],
-  },
-  {
-    question: "Cover Duration?",
-    options: ["1 Month", "12 Months"],
-  },
-  {
-    question: "Make",
-    options: [
-      "Nissan",
-      "Honda",
-      "Hyundai",
-      "Toyota",
-      "Volkswagen",
-      "Mercedes",
-      "BMW",
-      "Audi",
-      "Ford",
-      "Subaru",
-      "Mazda",
-      "Mitsubishi",
-      "Peugeot",
-      "Suzuki",
-      "Isuzu",
-      "Land Rover",
-      "Jeep",
-      "Chevrolet",
-      "Kia",
-      "Volvo",
-      "Jaguar",
-      "Porsche",
-      "Lexus",
-    ],
-  },
-];
+// const questions = [
+//   {
+//     question: "Vehicle Use?",
+//     options: ["Private", "Commercial", "PSV"],
+//   },
+//   {
+//     question: "Type of insurance interested in?",
+//     options: ["Comprehensive", "Third Party only"],
+//   },
+//   {
+//     question: "Cover Duration?",
+//     options: ["1 Month", "12 Months"],
+//   },
+//   {
+//     question: "Make",
+//     options: [
+//       "Nissan",
+//       "Honda",
+//       "Hyundai",
+//       "Toyota",
+//       "Volkswagen",
+//       "Mercedes",
+//       "BMW",
+//       "Audi",
+//       "Ford",
+//       "Subaru",
+//       "Mazda",
+//       "Mitsubishi",
+//       "Peugeot",
+//       "Suzuki",
+//       "Isuzu",
+//       "Land Rover",
+//       "Jeep",
+//       "Chevrolet",
+//       "Kia",
+//       "Volvo",
+//       "Jaguar",
+//       "Porsche",
+//       "Lexus",
+//     ],
+//   },
+// ];
 
 const CarInsuranceOnboard = () => {
-  const [answers, setAnswers] = useState<string[]>(
-    Array(questions.length).fill("")
-  );
+  // const [answers, setAnswers] = useState<string[]>(
+  //   Array(questions.length).fill("")
+  // );
 
-  const handleOptionChange = (questionIndex: number, option: string) => {
-    const newAnswers = [...answers];
-    newAnswers[questionIndex] = option;
-    setAnswers(newAnswers);
-  };
+  // const handleOptionChange = (questionIndex: number, option: string) => {
+  //   const newAnswers = [...answers];
+  //   newAnswers[questionIndex] = option;
+  //   setAnswers(newAnswers);
+  // };
 
-  const handleSubmit = () => {
-    // Handle form submission logic here
-    console.log("Form submitted with answers:", answers);
-  };
+  // const handleSubmit = () => {
+  //   // Handle form submission logic here
+  //   console.log("Form submitted with answers:", answers);
+  // };
 
   return (
     <>

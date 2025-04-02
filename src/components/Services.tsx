@@ -1,169 +1,127 @@
-import { useState } from "react";
-import { Card, CardHeader, CardTitle } from "./ui/card";
-import { MagnifierIcon, WalletIcon, ChartIcon } from "./Icons";
-import Nairobi from "../assets/nrb_sky.png";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 
-interface ServiceProps {
-  title: string;
-  description: string;
-  icon: JSX.Element;
-}
-
-const serviceList: ServiceProps[] = [
+const slides = [
   {
-    title: "Motor Car",
-    description:
-      "Comprehensive coverage for your car, protecting you on the road.",
-    icon: <ChartIcon />,
-    route: "/insurance/motor-car",
+    title: "Peace of Mind Today",
+    subtitle: "Unexpected events happen - be prepared",
+    text: "Don't wait until it's too late. Get covered now and protect what matters most.",
+    image:
+      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.bostonreview.net%2Fwp-content%2Fuploads%2F2022%2F10%2F2DU_Kenya8_5367331640-scaled-1.jpg&f=1&nofb=1&ipt=f3287873bf6acfcbe30f0fc95c808f0f995522aa45b68602bf1256ff273d2450&ipo=images",
   },
   {
-    title: "Health",
-    description:
-      "Affordable health insurance to keep you covered wherever you go.",
-    icon: <WalletIcon />,
-    route: "/insurance/health",
+    title: "Affordable Protection",
+    subtitle: "More affordable than you think",
+    text: "Our plans start at just a few dollars a month. Small price for big protection.",
+    image:
+      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fh2g6j3q2.rocketcdn.me%2Fwp-content%2Fuploads%2F2012%2F09%2Fmobilephoneuser.jpg&f=1&nofb=1&ipt=8e08e854d2b13eb17198b6ffbfd0d8722bc731a95a40acc0b275917a09d18c74&ipo=images",
   },
   {
-    title: "Motorcycle",
-    description:
-      "Affordable motorcycle insurance to keep you covered wherever you ride.",
-    icon: <WalletIcon />,
-    route: "/insurance/motorcycle",
+    title: "Instant Coverage",
+    subtitle: "No waiting periods for most policies",
+    text: "Get protected immediately after payment. No medical exams for many plans.",
+    image:
+      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.africanleadershipmagazine.co.uk%2Fwp-content%2Fuploads%2F2015%2F02%2FA-farmer-uses-his-mobile-008.jpeg&f=1&nofb=1&ipt=87168574f3e8d1a3385519450d6de9336a2c19fdbb043b906a9f148e74d3920f&ipo=images",
   },
   {
-    title: "Life",
-    description:
-      "Life insurance to protect your loved ones in case of the unexpected.",
-    icon: <MagnifierIcon />,
-    route: "/insurance/life",
-  },
-  {
-    title: "Home",
-    description:
-      "Comprehensive home insurance to protect your property and belongings.",
-    icon: <ChartIcon />,
-    route: "/insurance/home",
-  },
-  {
-    title: "Retirement",
-    description: "Retirement plans to ensure a secure and comfortable future.",
-    icon: <WalletIcon />,
-    route: "/insurance/retirement",
-  },
-  {
-    title: "Personal Accident",
-    description: "Personal accident insurance to cover unexpected events.",
-    icon: <MagnifierIcon />,
-    route: "/insurance/personal-accident",
+    title: "24/7 Support",
+    subtitle: "We're here when you need us",
+    text: "File claims anytime, anywhere through our simple mobile app.",
+    image:
+      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.gsma.com%2Fmobilefordevelopment%2Fwp-content%2Fuploads%2F2020%2F11%2FIMG_3652-edited-scaled.jpg&f=1&nofb=1&ipt=e94789f4c07d979d72866a0609f65a8aaad93b43cb1c5912d67b23a426b9ee80&ipo=images",
   },
 ];
 
-const handleCardClick = (
-  title: string,
-  route: string,
-  setSelectedCard: (title: string) => void
-) => {
-  setSelectedCard(title);
-  console.log(`Card clicked: ${title}`);
-  window.location.href = route;
-};
-
-const IconLink = ({ to, children }) => <Link to={to}>{children}</Link>;
-
 export const Services = () => {
-  const [selectedCard, setSelectedCard] = useState<string | null>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+  };
+
+  // Auto-advance slides
+  useEffect(() => {
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <section className="container py-24 sm:py-32">
-      <div className="grid lg:grid-cols-[1fr,1fr] gap-8 place-items-center">
-        <div>
-          <h2 className="text-3xl md:text-4xl font-bold">
-            <span className="bg-gradient-to-b from-primary/60 to-primary text-transparent bg-clip-text">
-              Your Insurance{" "}
-            </span>
-            Simplified
+    <section
+      className="relative bg-cover bg-center h-[75vh] w-screen overflow-hidden transition-all duration-1000"
+      style={{ backgroundImage: `url(${slides[currentSlide].image})` }}
+    >
+      {/* Green gradient overlay with transparency */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(to top, rgba(0, 128, 0, 0.4) 0%, rgba(0, 128, 0, 0.1) 50%, transparent 90%)",
+        }}
+      ></div>
+
+      <div className="container relative z-10 text-left text-white flex flex-col items-start justify-center h-full">
+        <div className="w-full max-w-2xl">
+          <h2 className="text-3xl md:text-5xl font-bold leading-tight text-start mb-2">
+            {slides[currentSlide].title}
           </h2>
+          <h3 className="text-xl md:text-2xl text-primary mb-4">
+            {slides[currentSlide].subtitle}
+          </h3>
+          <p className="text-lg md:text-xl mb-8">{slides[currentSlide].text}</p>
 
-          <p className="text-muted-foreground text-xl mt-4 mb-8 ">
-            Enjoy the convenience of comparing plans from top-rated insurers,
-            all in one place. No hidden fees, no fine print—just clear,
-            straightforward options that give you the coverage you need at a
-            price you can afford
-          </p>
-
-          <div className="grid grid-cols-2 gap-4">
-            {serviceList
-              .slice(0, 2)
-              .map(({ icon, title, description }: ServiceProps) => (
-                <div key={title} className="w-full">
-                  <Card
-                    onClick={() => handleCardClick(title, "/insurance/motor-car", setSelectedCard)}
-                    className="relative w-full flex justify-center items-center px-3 py-1.5 font-medium tracking-wide capitalize rounded-md hover:bg-gray-100 focus:outline-none transition duration-300 transform active:scale-95 ease-in-out"
-                  >
-                    <CardHeader className="space-y-1 flex md:flex-row justify-start items-start gap-4">
-                      <div className="mt-1 bg-primary/20 p-1 rounded-2xl">
-                        {icon}
-                      </div>
-                      <div>
-                        <CardTitle className="inline text-xl font-semibold leading-none">
-                          {title}
-                        </CardTitle>
-                      </div>
-                    </CardHeader>
-                  </Card>
-                </div>
-              ))}
-          </div>
-
-          <div className="grid grid-cols-3 gap-4 mt-8">
-            {serviceList
-              .slice(2)
-              .map(({ icon, title, description }: ServiceProps) => (
-                <div key={title} className="w-full">
-                  <Card
-                    onClick={() => handleCardClick(title, setSelectedCard)}
-                    className="relative w-full flex justify-center items-center px-2 py-1 font-medium tracking-wide capitalize rounded-md hover:bg-gray-100 focus:outline-none transition duration-300 transform active:scale-95 ease-in-out"
-                  >
-                    <CardHeader className="space-y-1 flex md:flex-row justify-start items-start gap-2">
-                      <div className="mt-1 bg-primary/20 p-1 rounded-2xl">
-                        {icon}
-                      </div>
-                      <div>
-                        <CardTitle className="inline text-lg font-semibold leading-none">
-                          {title}
-                        </CardTitle>
-                      </div>
-                    </CardHeader>
-                  </Card>
-                </div>
-              ))}
-            <div className="w-full">
-              <Card
-                onClick={() => handleCardClick("View All", setSelectedCard)}
-                className="relative w-full flex justify-center items-center px-2 py-1 font-medium tracking-wide capitalize rounded-md hover:bg-gray-100 focus:outline-none transition duration-300 transform active:scale-95 ease-in-out"
-              >
-                <CardHeader className="space-y-1 flex md:flex-row justify-start items-start gap-2">
-                  <div className="mt-1 bg-primary/20 p-1 rounded-2xl">
-                    <MagnifierIcon />
-                  </div>
-                  <div>
-                    <CardTitle className="inline text-lg font-semibold leading-none">
-                      View All
-                    </CardTitle>
-                  </div>
-                </CardHeader>
-              </Card>
-            </div>
+          <div className="flex gap-4 items-center">
+            <button
+              type="button"
+              className="px-6 py-3 bg-primary text-white font-semibold rounded-full border-2 border-[#39B54A] hover:bg-primary/80 transition"
+            >
+              Get Covered Now
+            </button>
           </div>
         </div>
+      </div>
 
-        <img
-          src={Nairobi}
-          className="w-[300px] md:w-[500px] lg:w-[600px] object-contain"
-          alt="About services"
-        />
+      {/* Slide indicators container at bottom */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex items-center gap-4">
+        {/* Previous button */}
+        <button
+          onClick={prevSlide}
+          className="bg-white/30 hover:bg-white/50 text-white p-1 rounded-full transition w-8 h-8 flex items-center justify-center"
+          aria-label="Previous slide"
+        >
+          &lt;
+        </button>
+
+        {/* Slide indicators */}
+        <div className="flex gap-2">
+          {slides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className="focus:outline-none"
+              aria-label={`Go to slide ${index + 1}`}
+            >
+              <div
+                className={`h-1 w-6 transition-all duration-300 ${
+                  index === currentSlide ? "bg-primary" : "bg-white/30"
+                }`}
+              />
+            </button>
+          ))}
+        </div>
+
+        {/* Next button */}
+        <button
+          onClick={nextSlide}
+          className="bg-white/30 hover:bg-white/50 text-white p-1 rounded-full transition w-8 h-8 flex items-center justify-center"
+          aria-label="Next slide"
+        >
+          &gt;
+        </button>
       </div>
     </section>
   );

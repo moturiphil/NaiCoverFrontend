@@ -11,9 +11,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-
-// import { GitHubLogoIcon } from "@radix-ui/react-icons";
-// import { Person } from "@radix-ui/react-icons";
 import { buttonVariants } from "./ui/button";
 import { Menu } from "lucide-react";
 import { ModeToggle } from "./mode-toggle";
@@ -26,34 +23,30 @@ interface RouteProps {
 
 const routeList: RouteProps[] = [
   {
-    href: "#home",
-    label: "Home",
+    href: "#MotorCarInsurance",
+    label: "Motor Car Insurance",
   },
   {
-    href: "#faq",
-    label: "FAQ",
+    href: "#MotorCycle",
+    label: "MotorCycle",
   },
   {
-    href: "#contact",
-    label: "Contact Us",
-  },
-  {
-    href: "#faq",
-    label: "FAQ",
+    href: "PersonalAccident",
+    label: "Personal Accident",
   },
 ];
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
-    <header className="sticky border-b-[1px] top-0 z-40 w-full bg-white dark:border-b-slate-700 dark:bg-background">
+    <header className="sticky top-0 z-40 w-full bg-gradient-to-r from-green-500 via-gray-800 to-red-500 shadow-md">
       <NavigationMenu className="mx-auto">
-        <NavigationMenuList className="container h-14 px-4 w-screen flex justify-between ">
+        <NavigationMenuList className="container h-14 px-4 w-screen flex justify-between">
           <NavigationMenuItem className="font-bold flex">
             <a
               rel="noreferrer noopener"
               href="/"
-              className="ml-2 font-bold text-xl flex"
+              className="ml-2 font-bold text-xl flex text-white hover:text-gray-200 transition-colors"
             >
               <LogoIcon />
               InsureMore
@@ -64,23 +57,23 @@ export const Navbar = () => {
           <span className="flex md:hidden">
             <ModeToggle />
 
-            <Sheet
-              open={isOpen}
-              onOpenChange={setIsOpen}
-            >
+            <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger className="px-2">
                 <Menu
-                  className="flex md:hidden h-5 w-5"
+                  className="flex md:hidden h-5 w-5 text-white hover:text-gray-200 transition-colors"
                   onClick={() => setIsOpen(true)}
                 >
                   <span className="sr-only">Menu Icon</span>
                 </Menu>
               </SheetTrigger>
 
-              <SheetContent side={"left"}>
+              <SheetContent
+                side={"left"}
+                className="bg-gradient-to-b from-green-500 via-gray-800 to-red-500 text-white"
+              >
                 <SheetHeader>
-                  <SheetTitle className="font-bold text-xl">
-                    Shadcn/React
+                  <SheetTitle className="font-bold text-xl text-white">
+                    InsureMore
                   </SheetTitle>
                 </SheetHeader>
                 <nav className="flex flex-col justify-center items-center gap-2 mt-4">
@@ -90,7 +83,9 @@ export const Navbar = () => {
                       key={label}
                       href={href}
                       onClick={() => setIsOpen(false)}
-                      className={buttonVariants({ variant: "ghost" })}
+                      className={`${buttonVariants({
+                        variant: "ghost",
+                      })} text-white hover:bg-white/20 w-full text-center`}
                     >
                       {label}
                     </a>
@@ -101,9 +96,8 @@ export const Navbar = () => {
                     target="_blank"
                     className={`w-[110px] border ${buttonVariants({
                       variant: "secondary",
-                    })}`}
+                    })} bg-white text-gray-800 hover:bg-gray-100`}
                   >
-                    {/* <GitHubLogoIcon className="mr-2 w-5 h-5" /> */}
                     My Policies
                   </a>
                 </nav>
@@ -120,7 +114,7 @@ export const Navbar = () => {
                 key={i}
                 className={`text-[17px] ${buttonVariants({
                   variant: "ghost",
-                })}`}
+                })} text-white hover:bg-white/20 hover:text-gray-200 transition-colors`}
               >
                 {route.label}
               </a>
@@ -132,9 +126,10 @@ export const Navbar = () => {
               rel="noreferrer noopener"
               href="https://github.com/leoMirandaa/shadcn-landing-page.git"
               target="_blank"
-              className={`border ${buttonVariants({ variant: "secondary" })}`}
+              className={`border ${buttonVariants({
+                variant: "secondary",
+              })} bg-white text-gray-800 hover:bg-gray-100`}
             >
-              {/* <GitHubLogoIcon className="mr-2 w-5 h-5" /> */}
               My Policies
             </a>
 
