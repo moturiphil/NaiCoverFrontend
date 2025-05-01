@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { CarInsuranceOnboard } from "./Pages/CarInsurance/CarInsuranceOnboard";
-import { CarInsuranceDetails } from "./Pages/CarInsurance/CarInsuranceDetails";
+// import { CarInsuranceOnboard } from "./Pages/CarInsurance/CarInsuranceOnboard";
+import { CarInsuranceCover } from "./Pages/CarInsurance/CarInsuranceCover";
+import { CarInsuranceDetails } from "./Pages/CarInsurance/CarInsuraceDetails"
 import Home from "./Pages/Home";
 
 function App() {
@@ -8,9 +9,13 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route
+        {/* <Route
           path="/insurance/motor-car"
           element={<CarInsuranceOnboard />}
+        /> */}
+        <Route
+          path="/insurance/motor-car"
+          element={<CarInsuranceCover />}
         />
         <Route
           path="/insurance/motor-car/car-details"

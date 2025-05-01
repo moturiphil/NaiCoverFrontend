@@ -44,7 +44,7 @@ const insuranceTypes = [
   {
     name: "Motorcycle Insurance",
     icon: <Bike className="w-5 h-5" />,
-    href: "/insurance/motor-car",
+    href: "/insurance/motor-cycle",
     description: "Protection for riders and their bikes",
     color: "text-red-600",
     bgColor: "bg-red-50",
@@ -52,7 +52,7 @@ const insuranceTypes = [
   {
     name: "Personal Accident",
     icon: <HeartPulse className="w-5 h-5" />,
-    href: "/insurance/motor-car",
+    href: "/insurance/personal-accident",
     description: "Coverage for unexpected injuries",
     color: "text-green-600",
     bgColor: "bg-green-50",

@@ -23,15 +23,15 @@ interface RouteProps {
 
 const routeList: RouteProps[] = [
   {
-    href: "#MotorCarInsurance",
+    href: "insurance/motor-car",
     label: "Motor Car Insurance",
   },
   {
-    href: "#MotorCycle",
+    href: "insurance/motor-cycle",
     label: "MotorCycle",
   },
   {
-    href: "PersonalAccident",
+    href: "insurance/personal-accident",
     label: "Personal Accident",
   },
 ];
