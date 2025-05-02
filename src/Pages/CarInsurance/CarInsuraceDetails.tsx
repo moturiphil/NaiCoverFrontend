@@ -1,4 +1,4 @@
-import { CarInsuranceDetails } from "../../components/MotorCarInsurance/CarInsuranceDetails";
+// import { CarInsuranceDetails } from "../../components/MotorCarInsurance/CarInsuranceDetails";
 import {
   NavigationMenu,
   NavigationMenuItem,

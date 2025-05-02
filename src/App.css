@@ -36,6 +36,10 @@
     --radius: 0.5rem;
   }
 
+  .radix-themes {
+    --default-font-family: var(--font-sans);
+  }
+
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
@@ -123,4 +127,3 @@
     @apply bg-background text-foreground;
   }
 }
-

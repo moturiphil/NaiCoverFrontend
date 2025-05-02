@@ -1,10 +1,5 @@
 import { useState } from "react";
 import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuList,
-} from "@/components/ui/navigation-menu";
-import {
   Sheet,
   SheetContent,
   SheetHeader,
@@ -12,7 +7,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { buttonVariants } from "./ui/button";
-import { Menu } from "lucide-react";
+import { Menu, Phone } from "lucide-react";
 import { ModeToggle } from "./mode-toggle";
 import { LogoIcon } from "./Icons";
 
@@ -21,122 +16,200 @@ interface RouteProps {
   label: string;
 }
 
-const routeList: RouteProps[] = [
+interface MenuItemProps extends RouteProps {
+  subItems?: RouteProps[];
+}
+
+const menuItems: MenuItemProps[] = [
   {
-    href: "insurance/motor-car",
-    label: "Motor Car Insurance",
+    href: "#",
+    label: "Apply",
+    subItems: [
+      { href: "/become-agent", label: "Become an agent" },
+      { href: "/partner", label: "Partner with us" },
+    ],
   },
   {
-    href: "insurance/motor-cycle",
-    label: "MotorCycle",
+    href: "#",
+    label: "Shop",
+    subItems: [
+      { href: "/insurance/motor-car", label: "Motor Car Insurance" },
+      { href: "/insurance/motor-cycle", label: "Motor-cycle Insurance" },
+      { href: "/insurance/personal-accident", label: "Personal Accident" },
+    ],
   },
   {
-    href: "insurance/personal-accident",
-    label: "Personal Accident",
+    href: "#",
+    label: "Tools & Tips",
+    subItems: [
+      { href: "/calculator", label: "Car Insurance Calculator" },
+      { href: "/resources", label: "Resource Center" },
+      { href: "/ask-agent", label: "Ask an Agent" },
+      { href: "/faqs", label: "FAQs" },
+    ],
+  },
+  {
+    href: "#",
+    label: "Company",
+    subItems: [
+      { href: "/about", label: "About Us" },
+      // { href: "/infosim", label: "Infosim" },
+    ],
+  },
+  {
+    href: "/lipa-mdogo",
+    label: "Lipa Mdogo Mdogo",
   },
 ];
 
-export const Navbar = () => {
+const NavBar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
   return (
-    <header className="sticky top-0 z-40 w-full bg-gradient-to-r from-green-500 via-gray-800 to-red-500 shadow-md">
-      <NavigationMenu className="mx-auto">
-        <NavigationMenuList className="container h-14 px-4 w-screen flex justify-between">
-          <NavigationMenuItem className="font-bold flex">
+    <header className="sticky top-0 z-40 w-full bg-white shadow-sm">
+      <div className="relative">
+        <div className="container h-16 px-4 w-screen flex justify-between items-center">
+          {/* Logo */}
+          <div className="font-bold flex">
             <a
               rel="noreferrer noopener"
               href="/"
-              className="ml-2 font-bold text-xl flex text-white hover:text-gray-200 transition-colors"
+              className="ml-2 font-bold text-xl flex items-center text-green-800 hover:text-green-700 transition-colors"
             >
               <LogoIcon />
-              InsureMore
+              <span className="ml-2">InsureMore</span>
             </a>
-          </NavigationMenuItem>
+          </div>
 
-          {/* mobile */}
-          <span className="flex md:hidden">
+          {/* Mobile Menu */}
+          <span className="flex md:hidden gap-2">
             <ModeToggle />
-
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger className="px-2">
-                <Menu
-                  className="flex md:hidden h-5 w-5 text-white hover:text-gray-200 transition-colors"
-                  onClick={() => setIsOpen(true)}
-                >
-                  <span className="sr-only">Menu Icon</span>
-                </Menu>
+                <Menu className="flex md:hidden h-5 w-5 text-gray-700 hover:text-green-600 transition-colors" />
               </SheetTrigger>
-
-              <SheetContent
-                side={"left"}
-                className="bg-gradient-to-b from-green-500 via-gray-800 to-red-500 text-white"
-              >
+              <SheetContent side={"left"} className="bg-white">
                 <SheetHeader>
-                  <SheetTitle className="font-bold text-xl text-white">
+                  <SheetTitle className="font-bold text-xl text-green-800">
                     InsureMore
                   </SheetTitle>
                 </SheetHeader>
-                <nav className="flex flex-col justify-center items-center gap-2 mt-4">
-                  {routeList.map(({ href, label }: RouteProps) => (
-                    <a
-                      rel="noreferrer noopener"
-                      key={label}
-                      href={href}
-                      onClick={() => setIsOpen(false)}
-                      className={`${buttonVariants({
-                        variant: "ghost",
-                      })} text-white hover:bg-white/20 w-full text-center`}
-                    >
-                      {label}
-                    </a>
+                <nav className="flex flex-col justify-center items-start gap-2 mt-4">
+                  {menuItems.map((item) => (
+                    <div key={item.label} className="w-full">
+                      <a
+                        href={item.href}
+                        className={`${buttonVariants({
+                          variant: "ghost",
+                        })} text-gray-700 hover:text-green-600 w-full text-left justify-start`}
+                      >
+                        {item.label}
+                      </a>
+                      {item.subItems && (
+                        <div className="ml-4 mt-1 space-y-1">
+                          {item.subItems.map((subItem) => (
+                            <a
+                              key={subItem.label}
+                              href={subItem.href}
+                              className={`${buttonVariants({
+                                variant: "ghost",
+                              })} text-gray-500 hover:text-green-600 w-full text-left justify-start text-sm`}
+                            >
+                              {subItem.label}
+                            </a>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   ))}
-                  <a
-                    rel="noreferrer noopener"
-                    href="https://github.com/leoMirandaa/shadcn-landing-page.git"
-                    target="_blank"
-                    className={`w-[110px] border ${buttonVariants({
-                      variant: "secondary",
-                    })} bg-white text-gray-800 hover:bg-gray-100`}
-                  >
-                    My Policies
-                  </a>
                 </nav>
               </SheetContent>
             </Sheet>
           </span>
 
-          {/* desktop */}
-          <nav className="hidden md:flex gap-2">
-            {routeList.map((route: RouteProps, i) => (
-              <a
-                rel="noreferrer noopener"
-                href={route.href}
-                key={i}
-                className={`text-[17px] ${buttonVariants({
-                  variant: "ghost",
-                })} text-white hover:bg-white/20 hover:text-gray-200 transition-colors`}
-              >
-                {route.label}
-              </a>
-            ))}
+          {/* Desktop Menu - Centered */}
+          <nav className="hidden md:flex items-center justify-center flex-1">
+            <ul className="flex items-center justify-center gap-1">
+              {menuItems.map((item) => (
+                <li key={item.label} className="relative group">
+                  {item.subItems ? (
+                    <>
+                      <button
+                        className={`${buttonVariants({
+                          variant: "ghost",
+                        })} text-gray-700 hover:text-green-600 bg-white hover:bg-green-50 group-hover:text-green-600 group-hover:bg-green-50 flex items-center`}
+                      >
+                        {item.label}
+                        <svg
+                          className="ml-1 h-4 w-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M19 9l-7 7-7-7"
+                          />
+                        </svg>
+                      </button>
+                      <div className="absolute left-0 top-full hidden group-hover:block bg-white border border-gray-200 rounded-lg shadow-lg z-50 min-w-[200px]">
+                        <ul className="p-2 space-y-1">
+                          {item.subItems.map((subItem) => (
+                            <li key={subItem.label}>
+                              <a
+                                href={subItem.href}
+                                className={`${buttonVariants({
+                                  variant: "ghost",
+                                })} w-full justify-start text-gray-700 hover:text-green-600 hover:bg-green-50`}
+                              >
+                                {subItem.label}
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </>
+                  ) : (
+                    <a
+                      href={item.href}
+                      className={`${buttonVariants({
+                        variant: "ghost",
+                      })} text-gray-700 hover:text-green-600`}
+                    >
+                      {item.label}
+                    </a>
+                  )}
+                </li>
+              ))}
+            </ul>
           </nav>
 
-          <div className="hidden md:flex gap-2">
+          {/* Right Side - Login and Help */}
+          <div className="hidden md:flex items-center gap-4">
+            <div className="flex items-center text-sm text-gray-600">
+              <Phone className="h-4 w-4 mr-2 text-green-600" />
+              <span>Our Agents can help you save</span>
+            </div>
             <a
-              rel="noreferrer noopener"
-              href="https://github.com/leoMirandaa/shadcn-landing-page.git"
-              target="_blank"
-              className={`border ${buttonVariants({
-                variant: "secondary",
-              })} bg-white text-gray-800 hover:bg-gray-100`}
+              href="/login"
+              className={`${buttonVariants({
+                variant: "outline",
+              })} border-green-600 text-green-600 hover:bg-green-50 hover:text-green-700`}
             >
-              My Policies
+              Login
             </a>
-
             <ModeToggle />
           </div>
-        </NavigationMenuList>
-      </NavigationMenu>
+        </div>
+
+        {/* Green Ribbon */}
+        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-green-600 to-green-800"></div>
+      </div>
     </header>
   );
 };
+
+export default NavBar;

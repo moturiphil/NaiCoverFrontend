@@ -1,6 +1,6 @@
 // import { FAQ } from "../components/FAQ";
 import { Footer } from "../components/Footer";
-import { Navbar } from "../components/Navbar";
+import Navbar from "../components/Navbar";
 // import { Newsletter } from "../components/Newsletter";
 import { PainPoints } from "../components/PainPoints";
 import { HowItWorks } from "../components/HowItWorks";
