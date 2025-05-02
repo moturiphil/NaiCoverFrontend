@@ -127,7 +127,7 @@ export const Footer = () => {
             />
           </div>
           <p className="text-sm text-gray-600">
-            Proudly Kenyan • Supporting Swahili & Local Languages
+            Proudly Kenyan
           </p>
         </div>
       </section>

@@ -118,16 +118,16 @@ export const Footer = () => {
             © 2025 InsureMore. All rights reserved.
           </p>
           <div className="flex gap-4">
-            <img src="/images/mpesa.png" alt="M-Pesa" className="h-8" />
-            <img src="/images/visa.png" alt="Visa" className="h-8" />
+            <img src="/src/assets/mpesa.png" alt="M-Pesa" className="h-8" />
+            {/* <img src="/images/visa.png" alt="Visa" className="h-8" />
             <img
               src="/images/mastercard.png"
               alt="Mastercard"
               className="h-8"
-            />
+            /> */}
           </div>
           <p className="text-sm text-gray-600">
-            Proudly Kenyan • Supporting Swahili & Local Languages
+            Proudly Kenyan
           </p>
         </div>
       </section>

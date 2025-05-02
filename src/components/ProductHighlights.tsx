@@ -1,46 +1,46 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Store, Bike, Users, Shield, MessageSquare, Lock } from "lucide-react";
+import { Bike, Car, Shield, MessageSquare, Lock } from "lucide-react";
 
 export const ProductHighlights = () => {
   const [activeTab, setActiveTab] = useState(0);
 
   const products = [
     {
-      icon: <Store className="w-8 h-8 text-green-600" />,
-      title: "For Market Traders",
-      description: "Stall and goods insurance via USSD",
+      icon: <Car className="w-8 h-8 text-blue-600" />, // Assuming you have a Car icon
+      title: "MotorCar Insurance",
+      description: "Comprehensive protection for your vehicle",
       features: [
-        "Cover for market stalls",
-        "Goods protection",
-        "USSD claims processing",
-        "Daily premium options",
+        "Third-party & comprehensive coverage",
+        "Accident and theft protection",
+        "24/7 roadside assistance",
+        "Fast claims processing",
       ],
-      color: "green",
+      color: "blue",
     },
     {
-      icon: <Bike className="w-8 h-8 text-yellow-600" />,
-      title: "For Riders",
-      description: "Affordable bike insurance with GPS tracking",
+      icon: <Bike className="w-8 h-8 text-orange-600" />,
+      title: "MotorCycle Insurance",
+      description: "Affordable coverage for bike owners",
       features: [
-        "Third-party & comprehensive",
-        "Theft protection",
-        "Accident coverage",
-        "GPS tracking included",
+        "Third-party liability coverage",
+        "Theft and damage protection",
+        "Medical expenses cover",
+        "Discounted rates for safe riders",
       ],
-      color: "yellow",
+      color: "orange",
     },
     {
-      icon: <Users className="w-8 h-8 text-red-600" />,
-      title: "For Families",
-      description: "Child education + health bundles",
+      icon: <Shield className="w-8 h-8 text-purple-600" />, // Assuming you have a Shield icon
+      title: "Personal Accident Cover",
+      description: "Protection against accidental injuries",
       features: [
-        "Education fund protection",
-        "Health coverage",
-        "Family discount packages",
-        "Emergency support",
+        "24-hour worldwide coverage",
+        "Permanent disability benefits",
+        "Medical expense reimbursement",
+        "Death benefit for beneficiaries",
       ],
-      color: "red",
+      color: "purple",
     },
   ];
 
@@ -87,7 +87,7 @@ export const ProductHighlights = () => {
                     ? "bg-green-500"
                     : products[activeTab].color === "yellow"
                     ? "bg-yellow-500"
-                    : "bg-red-500"
+                    : "bg-green-500"
                 } rounded-full flex items-center justify-center shadow-md mx-auto md:mx-0`}
               >
                 {products[activeTab].icon}

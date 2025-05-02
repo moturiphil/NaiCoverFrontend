@@ -192,7 +192,7 @@ const NavBar = () => {
               <span>Our Agents can help you save</span>
             </div>
             <a
-              href="/login"
+              href="/auth/login"
               className={`${buttonVariants({
                 variant: "outline",
               })} border-green-600 text-green-600 hover:bg-green-50 hover:text-green-700`}
