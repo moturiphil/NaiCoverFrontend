@@ -36,15 +36,24 @@ const CarDetails = () => {
   const [answers, setAnswers] = useState<string[]>(
     Array(questions.length).fill("")
   );
+  const [showError, setShowError] = useState(false);
 
   const handleOptionChange = (questionIndex: number, option: string) => {
     const newAnswers = [...answers];
     newAnswers[questionIndex] = option;
     setAnswers(newAnswers);
+    setShowError(false); // Hide error when user makes a selection
   };
 
+  const allQuestionsAnswered = answers.every((answer) => answer.trim() !== "");
+
   const handleSubmit = () => {
+    if (!allQuestionsAnswered) {
+      setShowError(true);
+      return;
+    }
     console.log("Form submitted with answers:", answers);
+    window.location.href = "/insurance/motor-car/car-details";
   };
 
   // Helper function to check if question is Yes/No type
@@ -61,17 +70,28 @@ const CarDetails = () => {
         <h1 className="text-3xl font-bold text-gray-900 mb-8">
           Tell us about your vehicle(s) insurance needs.
         </h1>
+
+        {showError && (
+          <div className="mb-6 p-4 bg-red-50 border-l-4 border-red-500 text-red-700">
+            <p>Please answer all questions before continuing.</p>
+          </div>
+        )}
+
         <div className="space-y-8">
           {questions.map((q, index) => (
             <div
               key={index}
-              className="flex flex-col md:flex-row items-start md:items-center mb-4 group"
+              className={`flex flex-col md:flex-row items-start md:items-center mb-4 group ${
+                showError && !answers[index] ? "animate-pulse" : ""
+              }`}
             >
               <div className="md:w-1/2 pr-4 mb-4 md:mb-0 flex items-center">
                 <div
                   className={`flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full mr-4 font-medium transition ${
                     answers[index]
                       ? "bg-green-600 text-white"
+                      : showError && !answers[index]
+                      ? "bg-red-100 text-red-600"
                       : "bg-gray-200 text-gray-700"
                   }`}
                 >
@@ -207,14 +227,15 @@ const CarDetails = () => {
         <div className="mt-12 flex justify-end">
           <button
             type="button"
-            onClick={() => {
-              handleSubmit();
-              window.location.href = "/insurance/motor-car/car-details";
-            }}
-            // className="w-full md:w-1/2 px-6 py-3 bg-gradient-to-r from-green-600 to-green-800 text-white font-medium rounded-lg hover:from-green-700 hover:to-green-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors shadow-md hover:shadow-lg"
-            className="px-6 py-3 bg-gradient-to-r from-green-600 to-green-800 text-white font-medium rounded-lg hover:from-green-700 hover:to-green-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors shadow-md hover:shadow-lg"
+            onClick={handleSubmit}
+            disabled={!allQuestionsAnswered}
+            className={`px-6 py-3 bg-gradient-to-r text-white font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors shadow-md hover:shadow-lg ${
+              allQuestionsAnswered
+                ? "from-green-600 to-green-800 hover:from-green-700 hover:to-green-900"
+                : "from-gray-400 to-gray-600 cursor-not-allowed"
+            }`}
           >
-            Save and Continue
+            Save & Continue
             <svg
               className="w-4 h-4 ml-2 inline"
               fill="none"

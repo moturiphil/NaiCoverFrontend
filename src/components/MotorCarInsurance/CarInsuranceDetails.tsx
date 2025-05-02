@@ -18,30 +18,6 @@ const questions = [
       "Have you had an active car insurance policy in the last 31 days?",
     options: ["Yes", "No"],
   },
-  // {
-  //   question: "Do you have a valid driver's license?",
-  //   options: ["Yes", "No"],
-  // },
-  // {
-  //   question: "Do you have a valid KRA PIN?",
-  //   options: ["Yes", "No"],
-  // },
-  // {
-  //   question: "Do you have a valid ID?",
-  //   options: ["Yes", "No"],
-  // },
-  // {
-  //   question: "Do you have a valid logbook?",
-  //   options: ["Yes", "No"],
-  // },
-  // {
-  //   question: "Do you have a valid inspection certificate?",
-  //   options: ["Yes", "No"],
-  // },
-  // {
-  //   question: "Do you have a valid certificate of good conduct?",
-  //   options: ["Yes", "No"],
-  // },
   {
     question: "Vehicle Use?",
     options: ["Private", "Commercial", "PSV"],
@@ -54,69 +30,6 @@ const questions = [
     question: "Cover Duration?",
     options: ["1 Month", "12 Months"],
   },
-  // {
-  //   "question": "Make",
-  //   "options": [
-  //     "Toyota",
-  //     "Nissan",
-  //     "Honda",
-  //     "Hyundai",
-  //     "Kia",
-  //     "Mitsubishi",
-  //     "Subaru",
-  //     "Mazda",
-  //     "Suzuki",
-  //     "Isuzu",
-  //     "Ford",
-  //     "Chevrolet",
-  //     "Volkswagen",
-  //     "Mercedes-Benz",
-  //     "BMW",
-  //     "Audi",
-  //     "Volvo",
-  //     "Peugeot",
-  //     "Renault",
-  //     "Land Rover",
-  //     "Jeep",
-  //     "Lexus",
-  //     "Porsche",
-  //     "Jaguar",
-  //     "Daihatsu",
-  //     "Fiat",
-  //     "Proton",
-  //     "SsangYong",
-  //     "Mahindra",
-  //     "Tata",
-  //     "Chery",
-  //     "Great Wall (GWM)",
-  //     "FAW",
-  //     "Haval",
-  //     "BYD",
-  //     "Geely",
-  //     "Changan",
-  //     "MG (Morris Garages)",
-  //     "Scania",
-  //     "MAN",
-  //     "Iveco",
-  //     "Hino",
-  //     "UD Trucks",
-  //     "Dongfeng",
-  //     "Foton",
-  //     "JAC"
-  //   ]
-  // },
-  // {
-  //   question: "Model",
-  //   options: [], // This will be dynamically populated based on the selected make
-  // },
-  // {
-  //   question: "Manufacture Date",
-  //   options: [], // This will be a user input
-  // },
-  // {
-  //   question: "Vehicle Estimated Value",
-  //   options: [], // This will be a user input
-  // },
 ];
 
 const CarInsuranceDetails = () => {
@@ -247,7 +160,7 @@ const CarInsuranceDetails = () => {
             }}
             className="px-4 py-2 border rounded bg-white text-black"
           >
-            Save and Continue
+            Save & Continue
           </button>
         </div>
       </div>

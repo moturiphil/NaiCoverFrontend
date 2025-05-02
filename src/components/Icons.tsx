@@ -17,6 +17,7 @@ export const LogoIcon = () => {
   );
 };
 
+
 export const MedalIcon = () => {
   return (
     <svg

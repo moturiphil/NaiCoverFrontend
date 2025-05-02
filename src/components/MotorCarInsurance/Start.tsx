@@ -118,7 +118,7 @@ const Start = () => {
             }}
             className="px-4 py-2 border rounded bg-white text-black"
             >
-            Save and Continue
+            Save & Continue
             </button>
         </div>
       </div>
