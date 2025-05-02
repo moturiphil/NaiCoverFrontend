@@ -8,7 +8,6 @@ import {
 } from "@/components/ui/sheet";
 import { buttonVariants } from "./ui/button";
 import { Menu, Phone } from "lucide-react";
-import { ModeToggle } from "./mode-toggle";
 import { LogoIcon } from "./Icons";
 
 interface RouteProps {
@@ -83,7 +82,6 @@ const NavBar = () => {
 
           {/* Mobile Menu */}
           <span className="flex md:hidden gap-2">
-            <ModeToggle />
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger className="px-2">
                 <Menu className="flex md:hidden h-5 w-5 text-gray-700 hover:text-green-600 transition-colors" />
@@ -201,7 +199,6 @@ const NavBar = () => {
             >
               Login
             </a>
-            <ModeToggle />
           </div>
         </div>
 
