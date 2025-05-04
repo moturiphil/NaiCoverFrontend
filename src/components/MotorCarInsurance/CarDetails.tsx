@@ -42,7 +42,7 @@ const CarDetails = () => {
     const newAnswers = [...answers];
     newAnswers[questionIndex] = option;
     setAnswers(newAnswers);
-    setShowError(false); // Hide error when user makes a selection
+    setShowError(false); 
   };
 
   const allQuestionsAnswered = answers.every((answer) => answer.trim() !== "");
