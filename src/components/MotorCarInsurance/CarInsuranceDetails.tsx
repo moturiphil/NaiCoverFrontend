@@ -162,7 +162,7 @@ const CarDetails = () => {
                         ? "model"
                         : "year"}
                     </option>
-                    {(q.id === "model" ? availableModels : q.options).map(
+                    {(q.id === "model" ? availableModels : q.options ?? []).map(
                       (option) => (
                         <option key={option} value={option}>
                           {option}
@@ -186,7 +186,7 @@ const CarDetails = () => {
                   />
                 ) : (
                   <div className="flex gap-4">
-                    {q.options.map((option) => (
+                    {(q.options ?? []).map((option) => (
                       <label
                         key={option}
                         className={`inline-flex items-center px-4 py-3 border rounded-lg cursor-pointer transition-all flex-1 text-center ${
@@ -202,7 +202,7 @@ const CarDetails = () => {
                           name={q.id}
                           value={option}
                           checked={formData[q.id] === option}
-                          onChange={() => handleChange(q.id, option)}
+                          onChange={() => handleChange(q.id, String(option))}
                           className="mr-2 w-4 h-4 text-green-600 border-gray-300 focus:ring-green-500"
                         />
                         <span className="text-gray-900 font-medium">
