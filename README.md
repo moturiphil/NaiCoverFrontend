@@ -1,50 +1,105 @@
-# React + TypeScript + Vite
+# InsureMore 🛡️  
+A blazing-fast, fully responsive insurance aggregator landing page built with React, Vite, and TypeScript.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🔗 Project URL: https://github.com/MicroHubLabs/InsureMoreFrontend
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Overview
 
-## Expanding the ESLint configuration
+InsureMore is a marketing and onboarding landing page for an insurance aggregator platform. It allows users to explore, compare, and connect with multiple insurance providers—all through a sleek, responsive, and SEO-optimized interface.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+---
 
-- Configure the top-level `parserOptions` property like this:
+## ✨ Features
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- ⚡ Built with Vite for ultra-fast builds
+- 💡 Developed using React 18 and TypeScript
+- 🎨 Tailwind CSS for styling
+- 🌙 Theme support with next-themes
+- 🧱 Modular component system powered by Radix UI and shadcn/ui conventions
+- 🧲 Drag-and-drop support via dnd-kit
+- ✅ Integrated with react-hook-form and zod for validation
+- 📊 Interactive charts with Recharts
+- 💬 Toast notifications via Sonner
+- 🔍 SEO and accessibility conscious
+
+---
+
+## 🧩 Dependencies
+
+### Core
+
+- react, react-dom
+- react-router-dom
+- vite
+- next (used for theming / structure compatibility)
+- tailwindcss, tailwindcss-animate, tailwind-merge
+- typescript, class-variance-authority, clsx
+
+### UI & Components
+
+- @radix-ui/react-* (UI primitives)
+- lucide-react (icons)
+- framer-motion (animations)
+- vaul (dialog primitives)
+- sonner (toasts)
+
+### Forms & Validation
+
+- react-hook-form
+- zod
+- @hookform/resolvers
+
+### Utilities
+
+- @tanstack/react-table
+- @dnd-kit/* (core, sortable, modifiers, utilities)
+- next-themes
+
+---
+
+## 🧪 Dev Dependencies
+
+- vite, @vitejs/plugin-react, @vitejs/plugin-react-swc
+- tailwindcss, autoprefixer, postcss
+- typescript, @types/*, typescript-eslint
+- eslint, eslint-plugin-react-hooks, eslint-plugin-react-refresh
+- globals
+
+
+---
+
+## ⚙️ Getting Started
+
+Clone the repo and install dependencies:
+
+```bash
+git clone https://github.com/MicroHubLabs/InsureMoreFrontend.git
+cd InsureMoreFrontend
+npm install
+
+ ```
+
+Start the Dev Server
+
+ ```bash
+npm run dev
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+Build for Production
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+npm run build
 ```
+
+---
+
+## ⚙️ Scripts
+
+| Command         | Description              |
+| --------------- | ------------------------ |
+| npm run dev     | Start dev server         |
+| npm run build   | Build for production     |
+| npm run preview | Preview production build |
+| npm run lint    | Run ESLint               |
