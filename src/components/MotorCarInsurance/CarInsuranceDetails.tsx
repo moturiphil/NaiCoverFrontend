@@ -1,19 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"; // or your routing library
 import ProgressBar from "@/components/PrograssBar";
+import motorcarData from "@/../src/data/motorcar.json";
 
-// Expanded vehicle data
-const vehicleData = {
-  makes: ["Toyota", "Nissan", "Honda", "Mazda", "BMW", "Mercedes-Benz"],
-  models: {
-    Toyota: ["Corolla", "Camry", "RAV4", "Hilux", "Land Cruiser"],
-    Nissan: ["Sunny", "Almera", "X-Trail", "Navara", "Patrol"],
-    Honda: ["Accord", "Civic", "CR-V", "Fit", "HR-V"],
-    Mazda: ["CX-5", "CX-30", "Mazda3", "Mazda6", "BT-50"],
-    BMW: ["3 Series", "5 Series", "X3", "X5", "X7"],
-    "Mercedes-Benz": ["C-Class", "E-Class", "GLC", "GLE", "S-Class"],
-  },
-  years: Array.from({ length: 30 }, (_, i) => new Date().getFullYear() - i),
-};
+// Use the imported JSON data instead of hardcoded vehicleData
+const vehicleData = motorcarData;
 
 const questions = [
   {
@@ -32,7 +23,7 @@ const questions = [
     id: "year",
     question: "What is the year of manufacture?",
     type: "select",
-    options: vehicleData.years,
+    options: Array.from({ length: 30 }, (_, i) => new Date().getFullYear() - i),
   },
   {
     id: "value",
@@ -49,6 +40,7 @@ const questions = [
 ];
 
 const CarDetails = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState<Record<string, string>>({
     make: "",
     model: "",
@@ -78,13 +70,31 @@ const CarDetails = () => {
     return Object.values(formData).every((value) => value !== "");
   };
 
+  const saveToCache = () => {
+    try {
+      localStorage.setItem("vehicleData", JSON.stringify(formData));
+    } catch (error) {
+      console.error("Failed to save to cache:", error);
+      // Fallback: You could use sessionStorage or other methods here
+      sessionStorage.setItem("vehicleData", JSON.stringify(formData));
+    }
+  };
+
   const handleSubmit = () => {
     if (!isFormValid()) {
       setShowError(true);
       return;
     }
-    console.log("Form submitted:", formData);
-    window.location.href = "/insurance/motor-car/car-details";
+
+    // Save data to cache
+    saveToCache();
+
+    // Navigate to signup page
+    navigate("/signup");
+
+    // Optional: You could also pass the data as state in the navigation
+    // pass the data as state in the navigation
+    // navigate("/signup", { state: { vehicleData: formData } });
   };
 
   return (
