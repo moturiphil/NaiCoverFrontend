@@ -14,6 +14,7 @@ const SignUp = () => {
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [showPassword, setShowPassword] = useState(false);
+  const [showTermsModal, setShowTermsModal] = useState(false);
   const [showVerificationModal, setShowVerificationModal] = useState(false);
 
   const validateForm = () => {
@@ -60,11 +61,17 @@ const SignUp = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
-      // Save user data
-      localStorage.setItem("userData", JSON.stringify(formData));
-      // Show verification modal instead of navigating directly
-      setShowVerificationModal(true);
+      // Show terms and conditions modal first
+      setShowTermsModal(true);
     }
+  };
+
+  const handleTermsAccept = () => {
+    setShowTermsModal(false);
+    // Save user data
+    localStorage.setItem("userData", JSON.stringify(formData));
+    // Show verification modal
+    setShowVerificationModal(true);
   };
 
   const handleModalConfirm = () => {
@@ -335,6 +342,98 @@ const SignUp = () => {
           </div>
         </form>
       </div>
+
+      {/* Terms & Conditions Modal */}
+      {showTermsModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-xl p-6 max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+            <h2 className="text-2xl font-bold text-center text-gray-900 mb-4">
+              Terms & Conditions
+            </h2>
+
+            <div className="prose prose-sm max-w-none mb-6">
+              <h3 className="font-semibold">1. Acceptance of Terms</h3>
+              <p>
+                By creating an account with our insurance platform, you agree to
+                be bound by these Terms and Conditions. If you do not agree with
+                any part of these terms, you must not use our services.
+              </p>
+
+              <h3 className="font-semibold mt-4">2. Account Registration</h3>
+              <p>
+                You must provide accurate and complete information during
+                registration. You are responsible for maintaining the
+                confidentiality of your account credentials and for all
+                activities that occur under your account.
+              </p>
+
+              <h3 className="font-semibold mt-4">3. Privacy Policy</h3>
+              <p>
+                Your personal information will be handled in accordance with our
+                Privacy Policy. We may use your information to provide services,
+                process claims, and for marketing purposes.
+              </p>
+
+              <h3 className="font-semibold mt-4">4. Insurance Services</h3>
+              <p>
+                Our platform facilitates the purchase of insurance products but
+                does not guarantee coverage. All policies are subject to the
+                terms and conditions set by the respective insurance providers.
+              </p>
+
+              <h3 className="font-semibold mt-4">5. Premium Payments</h3>
+              <p>
+                You agree to pay all premiums and fees associated with your
+                insurance policy. Failure to make timely payments may result in
+                cancellation of coverage.
+              </p>
+
+              <h3 className="font-semibold mt-4">6. Claims Processing</h3>
+              <p>
+                All claims are subject to investigation and approval by the
+                insurance provider. We are not responsible for claim decisions
+                made by third-party insurers.
+              </p>
+
+              <h3 className="font-semibold mt-4">7. Limitation of Liability</h3>
+              <p>
+                Our platform shall not be liable for any indirect, incidental,
+                or consequential damages arising from the use of our services or
+                inability to obtain insurance coverage.
+              </p>
+
+              <h3 className="font-semibold mt-4">8. Amendments</h3>
+              <p>
+                We reserve the right to modify these terms at any time.
+                Continued use of our services after changes constitutes
+                acceptance of the new terms.
+              </p>
+
+              <h3 className="font-semibold mt-4">9. Governing Law</h3>
+              <p>
+                These terms shall be governed by and construed in accordance
+                with the laws of Kenya. Any disputes shall be subject to the
+                exclusive jurisdiction of Kenyan courts.
+              </p>
+            </div>
+
+            <div className="flex flex-col space-y-3">
+              <button
+                onClick={handleTermsAccept}
+                className="px-6 py-3 bg-gradient-to-r text-white font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors shadow-md hover:shadow-lg from-green-600 to-green-800 hover:from-green-700 hover:to-green-900"
+              >
+                I Accept the Terms & Conditions
+              </button>
+              <button
+                onClick={() => setShowTermsModal(false)}
+                className="px-6 py-3 text-gray-700 font-medium rounded-lg border border-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors"
+              >
+                Decline
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Verification Email Modal */}
       {showVerificationModal && (
