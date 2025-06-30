@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { CarInsuranceCover } from "./Pages/CarInsurance/CarInsuranceCover";
 import { CarInsuranceDetails } from "./Pages/CarInsurance/CarInsuraceDetails";
 import { CarInsurancePolicyCover } from "./Pages/CarInsurance/CarInsurancePolicyCover";
+import { CarInsuranceValuation } from "./Pages/CarInsurance/CarInsuranceValuation";
 import { Register } from "./Pages/Auth/Register";
 import Home from "./Pages/Home";
 import Login from "./Pages/Auth/Login";
@@ -23,6 +24,10 @@ function App() {
         <Route
           path="/insurance/motor-car/coverage"
           element={<CarInsurancePolicyCover />}
+        />
+        <Route
+          path="/insurance/motor-car/valuation"
+          element={<CarInsuranceValuation />}
         />
       </Routes>
     </BrowserRouter>

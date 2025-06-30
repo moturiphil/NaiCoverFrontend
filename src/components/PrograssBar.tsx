@@ -4,7 +4,7 @@ interface ProgressBarProps {
   currentStage: number;
 }
 
-const stages = ["Start", "Vehicles", "Coverage", "Results"];
+const stages = ["Start", "Vehicles", "Register", "Coverage", "Book Valuation", "Payment"];
 
 const ProgressBar: React.FC<ProgressBarProps> = ({ currentStage }) => {
   return (

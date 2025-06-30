@@ -266,7 +266,7 @@ const CarPolicy = () => {
           additionalBenefits: additionalBenefits.filter((b) => b.added),
         })
       );
-      navigate("/insurance/motor-car/payment");
+      navigate("/insurance/motor-car/valuation");
     }
   };
 

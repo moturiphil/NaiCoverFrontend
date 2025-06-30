@@ -1,4 +1,3 @@
-// import React, { useState } from "react";\
 import { useState } from "react";
 import ProgressBar from "@/components/PrograssBar";
 
@@ -11,11 +10,6 @@ const carModels: { [key: string]: string[] } = {
 const questions = [
   {
     question: "Do you currently have car insurance?",
-    options: ["Yes", "No"],
-  },
-  {
-    question:
-      "Have you had an active car insurance policy in the last 31 days?",
     options: ["Yes", "No"],
   },
   {

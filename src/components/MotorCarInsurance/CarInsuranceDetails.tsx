@@ -29,7 +29,8 @@ const questions = [
     id: "value",
     question: "What is the estimated value of the car? (KES)",
     type: "input",
-    inputType: "number",
+    inputType: "text",
+    format: "currency",
   },
   {
     id: "owner",
@@ -38,6 +39,13 @@ const questions = [
     options: ["Yes", "No"],
   },
 ];
+
+// Helper to format as currency (KES)
+const formatCurrency = (value: string) => {
+  const num = Number(value.replace(/\D/g, ""));
+  if (isNaN(num)) return "";
+  return num.toLocaleString("en-KE");
+};
 
 const CarDetails = () => {
   const navigate = useNavigate();
@@ -52,7 +60,14 @@ const CarDetails = () => {
   const [showError, setShowError] = useState(false);
 
   const handleChange = (field: string, value: string) => {
-    const newData = { ...formData, [field]: value };
+    let processedValue = value;
+
+    // Format currency for the value field
+    if (field === "value") {
+      processedValue = formatCurrency(value);
+    }
+
+    const newData = { ...formData, [field]: processedValue };
 
     // If make changes, reset model and update available models
     if (field === "make") {
@@ -72,11 +87,16 @@ const CarDetails = () => {
 
   const saveToCache = () => {
     try {
-      localStorage.setItem("vehicleData", JSON.stringify(formData));
+      // Save the raw numeric value (without commas) to cache
+      const dataToSave = {
+        ...formData,
+        value: formData.value.replace(/,/g, ""),
+      };
+      localStorage.setItem("vehicleData", JSON.stringify(dataToSave));
     } catch (error) {
       console.error("Failed to save to cache:", error);
       // Fallback: You could use sessionStorage or other methods here
-      sessionStorage.setItem("vehicleData", JSON.stringify(formData));
+      sessionStorage.setItem("vehicleData", JSON.stringify(dataToSave));
     }
   };
 
@@ -91,10 +111,6 @@ const CarDetails = () => {
 
     // Navigate to signup page
     navigate("/signup");
-
-    // Optional: You could also pass the data as state in the navigation
-    // pass the data as state in the navigation
-    // navigate("/signup", { state: { vehicleData: formData } });
   };
 
   return (
@@ -191,8 +207,10 @@ const CarDetails = () => {
                     value={formData[q.id] || ""}
                     onChange={(e) => handleChange(q.id, e.target.value)}
                     placeholder={`Enter ${
-                      q.id === "value" ? "estimated value" : ""
+                      q.id === "value" ? "estimated value (KES)" : ""
                     }`}
+                    // Add pattern for numeric input if it's the value field
+                    inputMode={q.id === "value" ? "numeric" : undefined}
                   />
                 ) : (
                   <div className="flex gap-4">
