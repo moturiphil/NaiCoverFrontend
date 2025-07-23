@@ -1,21 +1,21 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"; // or your routing library
-import ProgressBar from "@/components/PrograssBar";
-import motorcarData from "@/../src/data/motorcar.json";
+import { useNavigate } from "react-router-dom"; 
+import ProgressBar from "@/components/MotorCyclePrograssBar";
+import motorcycleData from "@/../src/data/motorcar.json";
 
 // Use the imported JSON data instead of hardcoded vehicleData
-const vehicleData = motorcarData;
+const vehicleData = motorcycleData;
 
 const questions = [
   {
     id: "make",
-    question: "What is the vehicle make?",
+    question: "What is the bike's make?",
     type: "select",
     options: vehicleData.makes,
   },
   {
     id: "model",
-    question: "What is the vehicle model?",
+    question: "What is the bike's model?",
     type: "select",
     options: [],
   },
@@ -27,27 +27,27 @@ const questions = [
   },
   {
     id: "value",
-    question: "What is the estimated value of the car? (KES)",
+    question: "What is the estimated value of the bike? (KES)",
     type: "input",
     inputType: "text",
     format: "currency",
   },
   {
     id: "owner",
-    question: "Are you the owner of the car?",
+    question: "Are you the owner of the bike?",
     type: "radio",
     options: ["Yes", "No"],
   },
 ];
 
-// Helper to format as currency (KES)
+
 const formatCurrency = (value: string) => {
   const num = Number(value.replace(/\D/g, ""));
   if (isNaN(num)) return "";
   return num.toLocaleString("en-KE");
 };
 
-const CarDetails = () => {
+const MotorCycleDetails = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState<Record<string, string>>({
     make: "",
@@ -69,7 +69,6 @@ const CarDetails = () => {
 
     const newData = { ...formData, [field]: processedValue };
 
-    // If make changes, reset model and update available models
     if (field === "make") {
       newData.model = "";
       setAvailableModels(
@@ -120,7 +119,7 @@ const CarDetails = () => {
       </div>
       <div className="w-full md:w-5/8 container mx-auto px-4 py-8 bg-white rounded-xl">
         <h1 className="text-3xl font-bold text-gray-900 mb-8">
-          Tell us about your vehicle
+          Tell us about your Motorcycle
         </h1>
 
         {showError && (
@@ -276,4 +275,4 @@ const CarDetails = () => {
   );
 };
 
-export { CarDetails };
+export { MotorCycleDetails };
