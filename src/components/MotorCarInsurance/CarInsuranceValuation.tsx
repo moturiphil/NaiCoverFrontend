@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import ProgressBar from "@/components/PrograssBar";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+// import ProgressBar from "@/components/PrograssBar";
+// import DatePicker from "react-datepicker";
+// import "react-datepicker/dist/react-datepicker.css";
 
 const CarInsuranceValuation = () => {
   const navigate = useNavigate();

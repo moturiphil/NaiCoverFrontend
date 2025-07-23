@@ -5,6 +5,7 @@ import ProgressBar from "@/components/MotorCyclePrograssBar";
 const AuthPage = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<"register" | "login">("register");
+  const [isLoading, setIsLoading] = useState(false);
 
   // Registration form state
   const [regFormData, setRegFormData] = useState({
@@ -28,6 +29,12 @@ const AuthPage = () => {
   const [showVerificationModal, setShowVerificationModal] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
 
+  // Password strength indicator
+  const [passwordStrength, setPasswordStrength] = useState<{
+    score: number;
+    message: string;
+  }>({ score: 0, message: "" });
+
   // Common validation for both forms
   const validateEmail = (email: string) => {
     if (!email.trim()) {
@@ -45,6 +52,28 @@ const AuthPage = () => {
       return "Password must be at least 8 characters";
     }
     return "";
+  };
+
+  // Check password strength
+  const checkPasswordStrength = (password: string) => {
+    let score = 0;
+    let message = "";
+    
+    // Length check
+    if (password.length >= 8) score++;
+    if (password.length >= 12) score++;
+    
+    // Complexity checks
+    if (/[A-Z]/.test(password)) score++; // Has uppercase
+    if (/[0-9]/.test(password)) score++; // Has number
+    if (/[^A-Za-z0-9]/.test(password)) score++; // Has special char
+    
+    // Determine message
+    if (score <= 2) message = "Weak";
+    else if (score <= 4) message = "Medium";
+    else message = "Strong";
+    
+    setPasswordStrength({ score, message });
   };
 
   // Registration validation
@@ -95,6 +124,11 @@ const AuthPage = () => {
     if (errors[field]) {
       setErrors((prev) => ({ ...prev, [field]: "" }));
     }
+    
+    // Check password strength when password changes
+    if (field === "password") {
+      checkPasswordStrength(value);
+    }
   };
 
   const handleLoginChange = (field: string, value: string) => {
@@ -107,25 +141,31 @@ const AuthPage = () => {
     }
   };
 
-  const handleRegSubmit = (e: React.FormEvent) => {
+  const handleRegSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validateRegistration()) {
       setShowTermsModal(true);
     }
   };
 
-  const handleLoginSubmit = (e: React.FormEvent) => {
+  const handleLoginSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validateLogin()) {
-      // Handle login logic here
-      console.log("Login submitted:", loginFormData);
+      setIsLoading(true);
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      setIsLoading(false);
       navigate("/insurance/motor-car/coverage");
     }
   };
 
-  const handleTermsAccept = () => {
+  const handleTermsAccept = async () => {
     setShowTermsModal(false);
+    setIsLoading(true);
+    // Simulate API call for registration
+    await new Promise(resolve => setTimeout(resolve, 1000));
     localStorage.setItem("userData", JSON.stringify(regFormData));
+    setIsLoading(false);
     setShowVerificationModal(true);
   };
 
@@ -134,23 +174,31 @@ const AuthPage = () => {
     navigate("/insurance/motor-car/coverage");
   };
 
+  // Social login options
+  const socialLoginOptions = [
+    { name: "Google", icon: "G", color: "bg-red-500 hover:bg-red-600" },
+    { name: "Facebook", icon: "f", color: "bg-blue-600 hover:bg-blue-700" },
+    { name: "Apple", icon: "A", color: "bg-black hover:bg-gray-800" },
+  ];
+
   return (
     <>
       <div className="hidden md:block w-3/8 ml-16">
         <ProgressBar currentStage={2} />
       </div>
-      <div className="w-full md:w-5/8 container mx-auto px-4 py-8 bg-white rounded-xl shadow-lg">
-        {/* Enhanced Tab Navigation */}
-        <div className="flex mb-8">
+      
+      <div className="w-full md:w-5/8 container mx-auto px-4 py-8 bg-white rounded-xl shadow-lg max-w-3xl">
+        {/* Enhanced Tab Navigation with animation */}
+        <div className="flex mb-8 relative">
           <button
             className={`flex-1 py-4 px-6 font-medium text-sm focus:outline-none transition-all duration-300 ${
               activeTab === "register"
                 ? "text-white bg-gradient-to-r from-green-500 to-green-700 rounded-t-lg shadow-md"
                 : "text-gray-600 hover:text-green-600 hover:bg-green-50"
-            } relative overflow-hidden group`}
+            } relative z-10`}
             onClick={() => setActiveTab("register")}
           >
-            <span className="relative z-10 flex items-center justify-center">
+            <span className="flex items-center justify-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5 mr-2"
@@ -167,19 +215,16 @@ const AuthPage = () => {
               </svg>
               Create Account
             </span>
-            {activeTab === "register" && (
-              <span className="absolute bottom-0 left-0 right-0 h-1 bg-green-400"></span>
-            )}
           </button>
           <button
             className={`flex-1 py-4 px-6 font-medium text-sm focus:outline-none transition-all duration-300 ${
               activeTab === "login"
                 ? "text-white bg-gradient-to-r from-blue-500 to-blue-700 rounded-t-lg shadow-md"
                 : "text-gray-600 hover:text-blue-600 hover:bg-blue-50"
-            } relative overflow-hidden group`}
+            } relative z-10`}
             onClick={() => setActiveTab("login")}
           >
-            <span className="relative z-10 flex items-center justify-center">
+            <span className="flex items-center justify-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5 mr-2"
@@ -196,20 +241,28 @@ const AuthPage = () => {
               </svg>
               Sign In
             </span>
-            {activeTab === "login" && (
-              <span className="absolute bottom-0 left-0 right-0 h-1 bg-blue-400"></span>
-            )}
           </button>
+          {/* Animated underline */}
+          <div className="absolute bottom-0 left-0 right-0 h-1 bg-gray-200">
+            <div 
+              className={`h-full transition-all duration-300 ease-in-out ${
+                activeTab === "register" ? "bg-green-400 ml-0 w-1/2" : "bg-blue-400 ml-1/2 w-1/2"
+              }`}
+            ></div>
+          </div>
         </div>
 
         {activeTab === "register" ? (
           <>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            <h1 className="text-3xl font-bold text-gray-900 mb-2 text-center">
               Join Our Community
             </h1>
+            <p className="text-gray-600 text-center mb-6">
+              Create an account to get started with your insurance journey
+            </p>
 
-            <form onSubmit={handleRegSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <form onSubmit={handleRegSubmit} className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label
                     htmlFor="firstName"
@@ -387,9 +440,34 @@ const AuthPage = () => {
                 {errors.password && (
                   <p className="mt-1 text-sm text-red-600">{errors.password}</p>
                 )}
-                <p className="mt-1 text-xs text-gray-500">
-                  Password must be at least 8 characters long
-                </p>
+                
+                {/* Password strength indicator */}
+                {regFormData.password && (
+                  <div className="mt-2">
+                    <div className="flex items-center">
+                      <div className="w-full bg-gray-200 rounded-full h-2">
+                        <div
+                          className={`h-2 rounded-full ${
+                            passwordStrength.score <= 2
+                              ? "bg-red-500"
+                              : passwordStrength.score <= 4
+                              ? "bg-yellow-500"
+                              : "bg-green-500"
+                          }`}
+                          style={{
+                            width: `${(passwordStrength.score / 5) * 100}%`,
+                          }}
+                        ></div>
+                      </div>
+                      <span className="ml-2 text-xs text-gray-600">
+                        {passwordStrength.message}
+                      </span>
+                    </div>
+                    <p className="mt-1 text-xs text-gray-500">
+                      Use 8+ characters with uppercase, numbers & symbols
+                    </p>
+                  </div>
+                )}
               </div>
 
               <div>
@@ -420,57 +498,87 @@ const AuthPage = () => {
                 )}
               </div>
 
-              <div className="mt-8 flex justify-between items-center">
-                <button
-                  type="button"
-                  onClick={() => navigate(-1)}
-                  className="px-6 py-3 bg-gradient-to-r from-gray-500 to-gray-700 text-white font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-all duration-300 shadow-md hover:shadow-lg hover:from-gray-600 hover:to-gray-800 flex items-center"
-                >
-                  <svg
-                    className="w-4 h-4 mr-2"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M15 19l-7-7 7-7"
-                    />
-                  </svg>
-                  Back
-                </button>
+              <div className="mt-6">
                 <button
                   type="submit"
-                  className="px-6 py-3 bg-gradient-to-r from-green-600 to-green-800 text-white font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-all duration-300 shadow-md hover:shadow-lg hover:from-green-700 hover:to-green-900 flex items-center"
+                  className="w-full px-6 py-3 bg-gradient-to-r from-green-600 to-green-800 text-white font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-all duration-300 shadow-md hover:shadow-lg hover:from-green-700 hover:to-green-900 flex items-center justify-center"
+                  disabled={isLoading}
                 >
-                  Continue
-                  <svg
-                    className="w-4 h-4 ml-2"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
+                  {isLoading ? (
+                    <>
+                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Creating Account...
+                    </>
+                  ) : (
+                    <>
+                      Continue
+                      <svg
+                        className="w-4 h-4 ml-2"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M9 5l7 7-7 7"
+                        />
+                      </svg>
+                    </>
+                  )}
                 </button>
               </div>
+
+              <div className="relative mt-6">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-gray-300"></div>
+                </div>
+                <div className="relative flex justify-center text-sm">
+                  <span className="px-2 bg-white text-gray-500">
+                    Or sign up with
+                  </span>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-3 gap-3 mt-6">
+                {socialLoginOptions.map((option) => (
+                  <button
+                    key={option.name}
+                    type="button"
+                    className={`w-full ${option.color} text-white font-medium py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors duration-300 flex items-center justify-center`}
+                  >
+                    <span className="font-bold">{option.icon}</span>
+                    <span className="ml-2">{option.name}</span>
+                  </button>
+                ))}
+              </div>
+
+              <p className="text-center text-sm text-gray-600 mt-6">
+                Already have an account?{" "}
+                <button
+                  type="button"
+                  onClick={() => setActiveTab("login")}
+                  className="text-blue-600 hover:text-blue-800 font-medium focus:outline-none"
+                >
+                  Sign in
+                </button>
+              </p>
             </form>
           </>
         ) : (
           <>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            <h1 className="text-3xl font-bold text-gray-900 mb-2 text-center">
               Welcome Back!
             </h1>
+            <p className="text-gray-600 text-center mb-6">
+              Sign in to continue to your insurance dashboard
+            </p>
 
-
-            <form onSubmit={handleLoginSubmit} className="space-y-6">
+            <form onSubmit={handleLoginSubmit} className="space-y-4">
               <div>
                 <label
                   htmlFor="loginEmail"
@@ -591,47 +699,75 @@ const AuthPage = () => {
                 </div>
               </div>
 
-              <div className="mt-8 flex justify-between items-center">
-                <button
-                  type="button"
-                  onClick={() => navigate(-1)}
-                  className="px-6 py-3 bg-gradient-to-r from-gray-500 to-gray-700 text-white font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-all duration-300 shadow-md hover:shadow-lg hover:from-gray-600 hover:to-gray-800 flex items-center"
-                >
-                  <svg
-                    className="w-4 h-4 mr-2"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M15 19l-7-7 7-7"
-                    />
-                  </svg>
-                  Back
-                </button>
+              <div className="mt-6">
                 <button
                   type="submit"
-                  className="px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-800 text-white font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-300 shadow-md hover:shadow-lg hover:from-blue-700 hover:to-blue-900 flex items-center"
+                  className="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-800 text-white font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-300 shadow-md hover:shadow-lg hover:from-blue-700 hover:to-blue-900 flex items-center justify-center"
+                  disabled={isLoading}
                 >
-                  Sign In
-                  <svg
-                    className="w-4 h-4 ml-2"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
+                  {isLoading ? (
+                    <>
+                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Signing In...
+                    </>
+                  ) : (
+                    <>
+                      Sign In
+                      <svg
+                        className="w-4 h-4 ml-2"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M9 5l7 7-7 7"
+                        />
+                      </svg>
+                    </>
+                  )}
                 </button>
               </div>
+
+              <div className="relative mt-6">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-gray-300"></div>
+                </div>
+                <div className="relative flex justify-center text-sm">
+                  <span className="px-2 bg-white text-gray-500">
+                    Or sign in with
+                  </span>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-3 gap-3 mt-6">
+                {socialLoginOptions.map((option) => (
+                  <button
+                    key={option.name}
+                    type="button"
+                    className={`w-full ${option.color} text-white font-medium py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors duration-300 flex items-center justify-center`}
+                  >
+                    <span className="font-bold">{option.icon}</span>
+                    <span className="ml-2">{option.name}</span>
+                  </button>
+                ))}
+              </div>
+
+              <p className="text-center text-sm text-gray-600 mt-6">
+                Don't have an account?{" "}
+                <button
+                  type="button"
+                  onClick={() => setActiveTab("register")}
+                  className="text-blue-600 hover:text-blue-800 font-medium focus:outline-none"
+                >
+                  Register
+                </button>
+              </p>
             </form>
           </>
         )}
@@ -640,7 +776,7 @@ const AuthPage = () => {
       {/* Terms & Conditions Modal */}
       {showTermsModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-xl p-6 max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+          <div className="bg-white rounded-xl p-6 max-w-2xl w-full max-h-[80vh] overflow-y-auto animate-fade-in">
             <h2 className="text-2xl font-bold text-center text-gray-900 mb-4">
               Terms & Conditions
             </h2>
@@ -714,13 +850,25 @@ const AuthPage = () => {
             <div className="flex flex-col space-y-3">
               <button
                 onClick={handleTermsAccept}
-                className="px-6 py-3 bg-gradient-to-r text-white font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors shadow-md hover:shadow-lg from-green-600 to-green-800 hover:from-green-700 hover:to-green-900"
+                className="px-6 py-3 bg-gradient-to-r text-white font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors shadow-md hover:shadow-lg from-green-600 to-green-800 hover:from-green-700 hover:to-green-900 flex items-center justify-center"
+                disabled={isLoading}
               >
-                I Accept the Terms & Conditions
+                {isLoading ? (
+                  <>
+                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Processing...
+                  </>
+                ) : (
+                  "I Accept the Terms & Conditions"
+                )}
               </button>
               <button
                 onClick={() => setShowTermsModal(false)}
                 className="px-6 py-3 text-gray-700 font-medium rounded-lg border border-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors"
+                disabled={isLoading}
               >
                 Decline
               </button>
@@ -732,9 +880,9 @@ const AuthPage = () => {
       {/* Verification Email Modal */}
       {showVerificationModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-xl p-6 max-w-md w-full">
+          <div className="bg-white rounded-xl p-6 max-w-md w-full animate-fade-in">
             <div className="flex justify-center mb-4">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
+              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center animate-bounce">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-8 w-8 text-green-600"

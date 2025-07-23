@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom"; 
 import ProgressBar from "@/components/MotorCyclePrograssBar";
-import motorcycleData from "@/../src/data/motorcar.json";
+import motorcycleData from "@/../src/data/motorcycle_database.json";
 
 // Use the imported JSON data instead of hardcoded vehicleData
 const vehicleData = motorcycleData;
@@ -9,13 +9,13 @@ const vehicleData = motorcycleData;
 const questions = [
   {
     id: "make",
-    question: "What is the bike's make?",
+    question: "What is the motorcycle's make?",
     type: "select",
     options: vehicleData.makes,
   },
   {
     id: "model",
-    question: "What is the bike's model?",
+    question: "What is the motorcycle's model?",
     type: "select",
     options: [],
   },
@@ -27,14 +27,14 @@ const questions = [
   },
   {
     id: "value",
-    question: "What is the estimated value of the bike? (KES)",
+    question: "What is the estimated value of the motorcycle? (KES)",
     type: "input",
     inputType: "text",
     format: "currency",
   },
   {
     id: "owner",
-    question: "Are you the owner of the bike?",
+    question: "Are you the owner of the motorcycle?",
     type: "radio",
     options: ["Yes", "No"],
   },
@@ -119,7 +119,7 @@ const MotorCycleDetails = () => {
       </div>
       <div className="w-full md:w-5/8 container mx-auto px-4 py-8 bg-white rounded-xl">
         <h1 className="text-3xl font-bold text-gray-900 mb-8">
-          Tell us about your Motorcycle
+          Tell us more about your Motorcycle
         </h1>
 
         {showError && (
