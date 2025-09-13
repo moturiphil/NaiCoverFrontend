@@ -21,12 +21,12 @@ interface MenuItemProps extends RouteProps {
 
 const menuItems: MenuItemProps[] = [
   {
-    href: "#",
-    label: "Apply",
-    subItems: [
-      { href: "/become-agent", label: "Become an agent" },
-      { href: "/partner", label: "Partner with us" },
-    ],
+    href: "/partner",
+    label: "Partner",
+    // subItems: [
+    //   { href: "/become-an-agent", label: "Become an agent" },
+    //   { href: "/partner", label: "Partner with us" },
+    // ],
   },
   {
     href: "#",
@@ -41,19 +41,17 @@ const menuItems: MenuItemProps[] = [
     href: "#",
     label: "Tools & Tips",
     subItems: [
-      { href: "/calculator", label: "Car Insurance Calculator" },
+      // { href: "/calculator", label: "Car Insurance Calculator" },
       { href: "/resources", label: "Resource Center" },
-      { href: "/ask-agent", label: "Ask an Agent" },
-      { href: "/faqs", label: "FAQs" },
+      { href: "/ask-an-agent", label: "Ask an Agent" },
     ],
   },
   {
     href: "#",
-    label: "Company",
-    subItems: [
-      { href: "/about", label: "About Us" },
-      // { href: "/infosim", label: "Infosim" },
-    ],
+    label: "About Us",
+    // subItems: [
+    //   { href: "/about", label: "About Us" },
+    // ],
   },
   {
     href: "/lipa-mdogo",
@@ -192,7 +190,7 @@ const NavBar = () => {
               <span>Our Agents can help you save</span>
             </div>
             <a
-              href="https://insuremoreadmin.netlify.app/sign-in"
+              href="http://localhost:8080/login"
               className={`${buttonVariants({
                 variant: "outline",
               })} border-green-600 text-green-600 hover:bg-green-50 hover:text-green-700`}
