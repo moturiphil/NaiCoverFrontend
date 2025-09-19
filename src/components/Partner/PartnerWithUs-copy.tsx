@@ -146,7 +146,7 @@ const PartnerWithUs = () => {
           </h1>
           <p className="text-gray-600 max-w-2xl mx-auto">
             Join our network of trusted partners and grow your business with
-            InsureMore's comprehensive insurance solutions and competitive
+            NaiCover's comprehensive insurance solutions and competitive
             commissions.
           </p>
         </div>

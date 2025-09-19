@@ -1,13 +1,13 @@
-# InsureMore 🛡️  
+# NaiCover 🛡️  
 A blazing-fast, fully responsive insurance aggregator landing page built with React, Vite, and TypeScript.
 
-🔗 Project URL: https://github.com/MicroHubLabs/InsureMoreFrontend
+🔗 Project URL: https://github.com/moturiphil/NaiCoverFrontend
 
 ---
 
 ## 🚀 Overview
 
-InsureMore is a marketing and onboarding landing page for an insurance aggregator platform. It allows users to explore, compare, and connect with multiple insurance providers—all through a sleek, responsive, and SEO-optimized interface.
+NaiCover is a marketing and onboarding landing page for an insurance aggregator platform. It allows users to explore, compare, and connect with multiple insurance providers—all through a sleek, responsive, and SEO-optimized interface.
 
 ---
 
@@ -75,8 +75,8 @@ InsureMore is a marketing and onboarding landing page for an insurance aggregato
 Clone the repo and install dependencies:
 
 ```bash
-git clone https://github.com/MicroHubLabs/InsureMoreFrontend.git
-cd InsureMoreFrontend
+git clone https://github.com/moturiphil/NaiCoverFrontend.git
+cd NaiCoverFrontend
 npm install
 
  ```

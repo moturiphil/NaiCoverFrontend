@@ -18,7 +18,7 @@ export const InsuranceFormNavbar = () => {
               className="ml-2 font-bold text-xl flex items-center text-green-800 hover:text-green-700 transition-colors"
             >
               <LogoIcon />
-              InsureMore
+              NaiCover
             </a>
           </NavigationMenuItem>
 

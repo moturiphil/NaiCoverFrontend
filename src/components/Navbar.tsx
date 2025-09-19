@@ -74,7 +74,7 @@ const NavBar = () => {
               className="ml-2 font-bold text-xl flex items-center text-green-800 hover:text-green-700 transition-colors"
             >
               <LogoIcon />
-              <span className="ml-2">InsureMore</span>
+              <span className="ml-2">NaiCover</span>
             </a>
           </div>
 
@@ -87,7 +87,7 @@ const NavBar = () => {
               <SheetContent side={"left"} className="bg-white">
                 <SheetHeader>
                   <SheetTitle className="font-bold text-xl text-green-800">
-                    InsureMore
+                    NaiCover
                   </SheetTitle>
                 </SheetHeader>
                 <nav className="flex flex-col justify-center items-start gap-2 mt-4">

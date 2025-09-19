@@ -49,7 +49,7 @@ export const Navbar = () => {
               className="ml-2 font-bold text-xl flex text-white hover:text-gray-200 transition-colors"
             >
               <LogoIcon />
-              InsureMore
+              NaiCover
             </a>
           </NavigationMenuItem>
 
@@ -73,7 +73,7 @@ export const Navbar = () => {
               >
                 <SheetHeader>
                   <SheetTitle className="font-bold text-xl text-white">
-                    InsureMore
+                    NaiCover
                   </SheetTitle>
                 </SheetHeader>
                 <nav className="flex flex-col justify-center items-center gap-2 mt-4">

@@ -414,10 +414,10 @@ const AskAnAgent = () => {
               Get help via email with 24-hour response time
             </p>
             <a
-              href="mailto:support@insuremore.co.ke"
+              href="mailto:support@naicover.co.ke"
               className="text-green-600 hover:text-green-800 font-medium"
             >
-              support@insuremore.co.ke
+              support@naicover.co.ke
             </a>
           </div>
 

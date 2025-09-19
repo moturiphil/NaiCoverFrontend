@@ -12,7 +12,7 @@ export const Footer = () => {
             <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center text-white font-bold">
               I
             </div>
-            <span className="font-bold text-lg">InsureMore</span>
+            <span className="font-bold text-lg">NaiCover</span>
           </div>
           <p className="text-sm text-gray-600">
             100% African-owned insurance solutions
@@ -105,7 +105,7 @@ export const Footer = () => {
         <div className="flex flex-col gap-2">
           <h3 className="font-bold text-lg">Contact</h3>
           <p className="text-gray-600">Nairobi, Kenya</p>
-          <p className="text-gray-600">info@insuremore.co.ke</p>
+          <p className="text-gray-600">info@naicover.co.ke</p>
           <p className="text-gray-600">+254 700 000 000</p>
           <p className="text-gray-600">24/7 Support</p>
         </div>
@@ -115,7 +115,7 @@ export const Footer = () => {
       <section className="container pb-10 text-center">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-gray-600">
-            © 2025 InsureMore. All rights reserved.
+            © 2025 NaiCover. All rights reserved.
           </p>
           <div className="flex gap-4">
             <img src="/src/assets/mpesa.png" alt="M-Pesa" className="h-8" />
