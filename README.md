@@ -67,33 +67,15 @@ NaiCover is a marketing and onboarding landing page for an insurance aggregator 
 - eslint, eslint-plugin-react-hooks, eslint-plugin-react-refresh
 - globals
 
-
 ---
 
-## ⚙️ Getting Started
+## 📚 Documentation
 
-Clone the repo and install dependencies:
-
-```bash
-git clone https://github.com/moturiphil/NaiCoverFrontend.git
-cd NaiCoverFrontend
-npm install
-
- ```
-
-Start the Dev Server
-
- ```bash
-npm run dev
-```
-
-Build for Production
-
-```bash
-npm run build
-```
-
----
+| Document | Description |
+| -------- | ----------- |
+| [SETUP.md](./SETUP.md) | Comprehensive setup guide for all operating systems |
+| [CONTRIBUTING.md](./CONTRIBUTING.md) | Development workflow and contribution guidelines |
+| [DEPLOYMENT.md](./DEPLOYMENT.md) | Deployment options and platform configurations |
 
 ## ⚙️ Scripts
 
@@ -103,3 +85,77 @@ npm run build
 | npm run build   | Build for production     |
 | npm run preview | Preview production build |
 | npm run lint    | Run ESLint               |
+
+## 🚀 Quick Start
+
+```bash
+# Clone the repository
+git clone https://github.com/moturiphil/NaiCoverFrontend.git
+cd NaiCoverFrontend
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+```
+
+For detailed setup instructions, see [SETUP.md](./SETUP.md).
+
+## 🤝 Contributing
+
+We welcome contributions! Please read our [Contributing Guidelines](./CONTRIBUTING.md) to get started.
+
+### Development Workflow
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Run tests and linting
+5. Submit a pull request
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed instructions.
+
+## 🚀 Deployment
+
+This application can be deployed on various platforms:
+
+- **Vercel** (Recommended) - One-click deployment
+- **Netlify** - Static site hosting with forms
+- **AWS S3 + CloudFront** - Enterprise-grade hosting
+- **Firebase Hosting** - Google's hosting platform
+- **Traditional VPS** - Custom server deployment
+
+For detailed deployment instructions, see [DEPLOYMENT.md](./DEPLOYMENT.md).
+
+### Quick Deploy
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/moturiphil/NaiCoverFrontend)
+
+## 🏗️ Architecture
+
+### Tech Stack
+
+- **Frontend Framework**: React 18 with TypeScript
+- **Build Tool**: Vite (ultra-fast builds)
+- **Styling**: Tailwind CSS + shadcn/ui components
+- **State Management**: React hooks + Context API
+- **Forms**: React Hook Form + Zod validation
+- **Animations**: Framer Motion
+- **Icons**: Lucide React
+- **Routing**: React Router DOM
+
+### Project Structure
+
+```
+src/
+├── components/          # React components
+│   ├── ui/             # Reusable UI components
+│   ├── forms/          # Form components
+│   └── ...             # Feature-specific components
+├── hooks/              # Custom React hooks
+├── lib/                # Utility functions
+├── data/               # Static data and constants
+├── assets/             # Images, fonts, etc.
+└── app/                # Application pages
+```
